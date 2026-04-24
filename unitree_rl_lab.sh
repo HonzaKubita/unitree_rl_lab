@@ -30,6 +30,8 @@ complete -o nospace -F _ut_rl_lab_python_argcomplete_wrapper "./unitree_rl_lab.s
 
 
 _ut_setup_conda_env() {
+    # ensure the existance of activate.d
+    mkdir -p ${CONDA_PREFIX}/etc/conda/activate.d
 
     # copied from isaaclab/_isaac_sim/setup_conda_env.sh
     # add source unitree_rl_lab.sh to conda activate.d
@@ -64,7 +66,7 @@ case "$1" in
         git lfs install # ensure git lfs is installed
         pip install -e ${UNITREE_RL_LAB_PATH}/source/unitree_rl_lab/
         _ut_setup_conda_env
-        activate-global-python-argcomplete
+        activate-global-python-argcomplete  --user
         ;;
     -l|--list)
         shift
